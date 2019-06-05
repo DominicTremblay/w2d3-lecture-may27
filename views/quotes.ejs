@@ -6,6 +6,8 @@
 
       <div class="accordion" id="quote-list">
         <%# do for loop here %>
+
+        <% for (const movieQuote of quotes) { %> 
         
         <div class="card">
           <div class="card-header" id="headingTwo">
@@ -14,23 +16,23 @@
                 class="btn btn-link collapsed"
                 type="button"
                 data-toggle="collapse"
-                data-target="#quote-id"
+                data-target="#<%= movieQuote.id %>"
                 aria-expanded="false"
                 aria-controls="collapseTwo"
               >
-                Quote content
+                <%= movieQuote.quote %>
               </button>
             </h5>
 
             <span>
-              <form method="" action=""><input type="submit" class="btn btn-secondary btn-sm" value="Edit"></form>
-              <form method="" action=""><input type="submit" class="btn btn-secondary btn-sm"
+              <form method="get" action="/quotes/<%= movieQuote.id %>"><input type="submit" class="btn btn-secondary btn-sm" value="Edit"></form>
+              <form method="post" action="/quotes/<%= movieQuote.id %>/delete"><input type="submit" class="btn btn-secondary btn-sm"
                   value="Delete"></form>
             </span>
 
           </div>
           <div
-            id="quote-id"
+            id="<%= movieQuote.id %>"
             class="collapse"
             aria-labelledby="headingTwo"
             data-parent="#quote-list"
@@ -57,8 +59,11 @@
           </div>
         </div>
         <%# close quote for loop %>
+        
+        <% } %>
+
       </div>
-      <a href="#" class="btn btn-primary">Add Quote</a>
+      <a href="/quotes/new" class="btn btn-primary">Add Quote</a>
     </div>
   </body>
 </html>
